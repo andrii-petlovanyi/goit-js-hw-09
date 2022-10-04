@@ -16,3 +16,111 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer-btn {
+  width: 80px;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #f1ecec;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.timer-btn:hover:not(:disabled),
+.timer-btn:focus:not(:disabled) {
+  cursor: pointer;
+  border: 2px solid grey;
+  color: grey;
+}
+
+/* // ==== 2 Example */
+input ~ [data-start] {
+  width: 50px;
+  height: 30px;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: rgb(243, 240, 240);
+  color: black;
+}
+
+input ~ [data-start]:hover,
+input ~ [data-start]:focus {
+  cursor: pointer;
+  color: grey;
+  border: 1px solid grey;
+}
+
+.timer {
+  display: flex;
+  gap: 20px;
+}
+
+.timer .value {
+  font-size: 40px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.timer .label {
+  font-size: 13px;
+  margin-left: -5px;
+  color: black;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.timer .field {
+  position: relative;
+}
+
+.timer .field:not(:last-child)::before {
+  content: ':';
+  font-weight: 700;
+  font-size: 25px;
+  position: absolute;
+  right: -15%;
+  top: 12%;
+}
+
+/* === Example 3 === */
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 10px;
+  width: 300px;
+  border-radius: 20px;
+  box-shadow: 6px 5px 16px 5px rgba(141, 133, 133, 0.62);
+  -webkit-box-shadow: 6px 5px 16px 5px rgba(141, 133, 133, 0.62);
+  -moz-box-shadow: 6px 5px 16px 5px rgba(141, 133, 133, 0.62);
+  padding: 20px;
+}
+
+.form input {
+  height: 30px;
+  max-width: 70px;
+}
+
+.form label {
+  display: flex;
+  justify-content: space-between;
+}
+.form button {
+  margin-top: 10px;
+  align-self: center;
+  padding: 10px 15px;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 7px;
+  border: 1px solid black;
+  background-color: rgb(243, 240, 240);
+  color: black;
+}
+
+.form button:hover {
+  cursor: pointer;
+  color: grey;
+  border: 1px solid grey;
+}
