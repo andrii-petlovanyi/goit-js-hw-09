@@ -38,19 +38,11 @@ img {
 input ~ [data-start] {
   width: 50px;
   height: 30px;
-  font-weight: 600;
-  font-size: 12px;
-  border-radius: 5px;
-  border: 1px solid black;
-  background-color: rgb(243, 240, 240);
-  color: black;
 }
 
-input ~ [data-start]:hover,
-input ~ [data-start]:focus {
+input ~ [data-start]:hover:not(:disabled),
+input ~ [data-start]:focus:not(:disabled) {
   cursor: pointer;
-  color: grey;
-  border: 1px solid grey;
 }
 
 .timer {

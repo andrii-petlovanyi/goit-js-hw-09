@@ -24,11 +24,9 @@ if (lastColor) {
 function onClickStart() {
   refs.btnStop.disabled = false;
   refs.btnStart.disabled = true;
-
+  setColor();
   timerId = setInterval(() => {
-    let color = getRandomHexColor();
-    document.body.style.backgroundColor = color;
-    localStorage.setItem(STORAGE_KEY, color);
+    setColor();
   }, COLOR_CHANGE_DELAY);
 }
 
@@ -36,4 +34,10 @@ function onClickStop() {
   clearInterval(timerId);
   refs.btnStop.disabled = true;
   refs.btnStart.disabled = false;
+}
+
+function setColor() {
+  let color = getRandomHexColor();
+  document.body.style.backgroundColor = color;
+  localStorage.setItem(STORAGE_KEY, color);
 }

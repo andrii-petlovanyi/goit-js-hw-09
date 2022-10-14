@@ -1,33 +1,15 @@
 import Notiflix from 'notiflix';
-const STORAGE_KEY = 'promise-form-state';
 const formData = document.querySelector('form');
 
-formData.addEventListener('input', onFormInput);
 formData.addEventListener('submit', onFormSubmit);
-
-const formDataInStorage = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-
-function onFormInput(evt) {
-  formDataInStorage[evt.target.name] = evt.target.value;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formDataInStorage));
-}
 
 function onFormSubmit(evt) {
   evt.preventDefault();
-  if (
-    !formDataInStorage.delay ||
-    !formDataInStorage.step ||
-    !formDataInStorage.amount
-  ) {
-    return;
-  }
-  let delayData = Number(formDataInStorage.delay);
-  const stepData = Number(formDataInStorage.step);
-  const amountData = Number(formDataInStorage.amount);
+  let delayData = +formData.elements.delay.value;
+  const stepData = +formData.elements.step.value;
+  const amountData = +formData.elements.amount.value;
 
-  console.log(localStorage.getItem(STORAGE_KEY));
   evt.target.reset();
-  localStorage.removeItem(STORAGE_KEY);
 
   for (let amount = 0; amount < amountData; amount++)
     createPromise(amount + 1, (delayData += stepData))
