@@ -4,11 +4,8 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const refs = {
   input: document.querySelector('input[type="text"]'),
+  timer: document.querySelector('.timer'),
   btnStart: document.querySelector('[data-start]'),
-  daysOut: document.querySelector('[data-days]'),
-  hoursOut: document.querySelector('[data-hours]'),
-  minutesOut: document.querySelector('[data-minutes]'),
-  secondsOut: document.querySelector('[data-seconds]'),
 };
 const CHANGE_DELAY = 1000;
 
@@ -33,33 +30,35 @@ const options = {
     function runReverseTimer() {
       refs.btnStart.disabled = true;
       refs.input.disabled = true;
-      date();
+      getDate(selectedDates);
       intervalId = setInterval(() => {
-        date();
+        getDate(selectedDates);
       }, CHANGE_DELAY);
     }
 
-    function date() {
-      currentTime = Date.now();
-      deltaTime = selectedDates[0] - currentTime;
-
-      if (deltaTime < 1000) {
-        clearInterval(intervalId);
-      }
-
-      updateDataTimeOnPage();
-      function updateDataTimeOnPage() {
-        const { days, hours, minutes, seconds } = convertMs(deltaTime);
-
-        refs.daysOut.textContent = days;
-        refs.hoursOut.textContent = hours;
-        refs.minutesOut.textContent = minutes;
-        refs.secondsOut.textContent = seconds;
-      }
-    }
     refs.btnStart.addEventListener('click', runReverseTimer);
   },
 };
+
+function getDate(selectedDates) {
+  currentTime = Date.now();
+  deltaTime = selectedDates[0] - currentTime;
+
+  if (deltaTime < 1000) {
+    clearInterval(intervalId);
+  }
+
+  updateDataTimeOnPage(deltaTime);
+}
+
+function updateDataTimeOnPage(deltaTime) {
+  let dateOutputRefs = refs.timer.querySelectorAll('.value');
+
+  dateOutputRefs.forEach(
+    (elRef, index) =>
+      (elRef.textContent = Object.values(convertMs(deltaTime))[index])
+  );
+}
 
 const fp = flatpickr(refs.input, options);
 

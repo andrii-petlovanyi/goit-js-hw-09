@@ -14,14 +14,14 @@ function getRandomHexColor() {
 refs.btnStart.classList.add('timer-btn');
 refs.btnStop.classList.add('timer-btn');
 
-refs.btnStart.addEventListener('click', onClickStart);
-refs.btnStop.addEventListener('click', onClickStop);
+refs.btnStart.addEventListener('click', colorSwitchStart);
+refs.btnStop.addEventListener('click', colorSwitchStop);
 
 if (lastColor) {
   document.body.style.backgroundColor = lastColor;
 }
 
-function onClickStart() {
+function colorSwitchStart() {
   refs.btnStop.disabled = false;
   refs.btnStart.disabled = true;
   setColor();
@@ -30,7 +30,7 @@ function onClickStart() {
   }, COLOR_CHANGE_DELAY);
 }
 
-function onClickStop() {
+function colorSwitchStop() {
   clearInterval(timerId);
   refs.btnStop.disabled = true;
   refs.btnStart.disabled = false;
