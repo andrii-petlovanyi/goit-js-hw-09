@@ -4,7 +4,10 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const refs = {
   input: document.querySelector('input[type="text"]'),
-  timer: document.querySelector('.timer'),
+  daysOut: document.querySelector('[data-days]'),
+  hoursOut: document.querySelector('[data-hours]'),
+  minutesOut: document.querySelector('data-minutes'),
+  secondsOut: document.querySelector('[data-seconds]'),
   btnStart: document.querySelector('[data-start]'),
 };
 const CHANGE_DELAY = 1000;
@@ -52,12 +55,19 @@ function getDate(selectedDates) {
 }
 
 function updateDataTimeOnPage(deltaTime) {
-  let dateOutputRefs = refs.timer.querySelectorAll('.value');
+  const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
-  dateOutputRefs.forEach(
-    (elRef, index) =>
-      (elRef.textContent = Object.values(convertMs(deltaTime))[index])
-  );
+  refs.daysOut.textContent = days;
+  refs.hoursOut.textContent = hours;
+  refs.minutesOut.textContent = minutes;
+  refs.secondsOut.textContent = seconds;
+
+  // let dateOutputRefs = refs.timer.querySelectorAll('.value');
+
+  // dateOutputRefs.forEach(
+  //   (elRef, index) =>
+  //     (elRef.textContent = Object.values(convertMs(deltaTime))[index])
+  // );
 }
 
 const fp = flatpickr(refs.input, options);
