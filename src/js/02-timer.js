@@ -45,8 +45,8 @@ const options = {
 };
 
 function getDate(selectedDates) {
-  currentTime = Date.now();
-  deltaTime = selectedDates[0] - currentTime;
+  let currentTime = Date.now();
+  let deltaTime = selectedDates[0] - currentTime;
 
   if (deltaTime < 1000) {
     clearInterval(intervalId);
