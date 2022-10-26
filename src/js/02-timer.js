@@ -4,14 +4,15 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const refs = {
   input: document.querySelector('input[type="text"]'),
-  // daysOut: document.querySelector('[data-days]'),
-  // hoursOut: document.querySelector('[data-hours]'),
-  // minutesOut: document.querySelector('data-minutes'),
-  // secondsOut: document.querySelector('[data-seconds]'),
+  daysOut: document.querySelector('[data-days]'),
+  hoursOut: document.querySelector('[data-hours]'),
+  minutesOut: document.querySelector('[data-minutes]'),
+  secondsOut: document.querySelector('[data-seconds]'),
   btnStart: document.querySelector('[data-start]'),
-  timer: document.querySelector('.timer'),
+  // timer: document.querySelector('.timer'),
 };
 const CHANGE_DELAY = 1000;
+let intervalId = null;
 
 refs.btnStart.disabled = true;
 
@@ -23,7 +24,6 @@ const options = {
   onClose(selectedDates) {
     let currentTime = Date.now();
     let deltaTime = selectedDates[0] - currentTime;
-    let intervalId = null;
     if (deltaTime < 0) {
       refs.btnStart.disabled = true;
       Notiflix.Notify.failure('Please choose a date in the future');
@@ -56,19 +56,19 @@ function getDate(selectedDates) {
 }
 
 function updateDataTimeOnPage(deltaTime) {
-  // const { days, hours, minutes, seconds } = convertMs(deltaTime);
+  const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
-  // refs.daysOut.textContent = days;
-  // refs.hoursOut.textContent = hours;
-  // refs.minutesOut.textContent = minutes;
-  // refs.secondsOut.textContent = seconds;
+  refs.daysOut.textContent = days;
+  refs.hoursOut.textContent = hours;
+  refs.minutesOut.textContent = minutes;
+  refs.secondsOut.textContent = seconds;
 
-  let dateOutputRefs = refs.timer.querySelectorAll('.value');
+  // let dateOutputRefs = refs.timer.querySelectorAll('.value');
 
-  dateOutputRefs.forEach(
-    (elRef, index) =>
-      (elRef.textContent = Object.values(convertMs(deltaTime))[index])
-  );
+  // dateOutputRefs.forEach(
+  //   (elRef, index) =>
+  //     (elRef.textContent = Object.values(convertMs(deltaTime))[index])
+  // );
 }
 
 const fp = flatpickr(refs.input, options);
