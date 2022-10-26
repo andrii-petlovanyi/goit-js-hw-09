@@ -4,11 +4,12 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const refs = {
   input: document.querySelector('input[type="text"]'),
-  daysOut: document.querySelector('[data-days]'),
-  hoursOut: document.querySelector('[data-hours]'),
-  minutesOut: document.querySelector('data-minutes'),
-  secondsOut: document.querySelector('[data-seconds]'),
+  // daysOut: document.querySelector('[data-days]'),
+  // hoursOut: document.querySelector('[data-hours]'),
+  // minutesOut: document.querySelector('data-minutes'),
+  // secondsOut: document.querySelector('[data-seconds]'),
   btnStart: document.querySelector('[data-start]'),
+  timer: document.querySelector('.timer'),
 };
 const CHANGE_DELAY = 1000;
 
@@ -55,19 +56,19 @@ function getDate(selectedDates) {
 }
 
 function updateDataTimeOnPage(deltaTime) {
-  const { days, hours, minutes, seconds } = convertMs(deltaTime);
+  // const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
-  refs.daysOut.textContent = days;
-  refs.hoursOut.textContent = hours;
-  refs.minutesOut.textContent = minutes;
-  refs.secondsOut.textContent = seconds;
+  // refs.daysOut.textContent = days;
+  // refs.hoursOut.textContent = hours;
+  // refs.minutesOut.textContent = minutes;
+  // refs.secondsOut.textContent = seconds;
 
-  // let dateOutputRefs = refs.timer.querySelectorAll('.value');
+  let dateOutputRefs = refs.timer.querySelectorAll('.value');
 
-  // dateOutputRefs.forEach(
-  //   (elRef, index) =>
-  //     (elRef.textContent = Object.values(convertMs(deltaTime))[index])
-  // );
+  dateOutputRefs.forEach(
+    (elRef, index) =>
+      (elRef.textContent = Object.values(convertMs(deltaTime))[index])
+  );
 }
 
 const fp = flatpickr(refs.input, options);
@@ -80,11 +81,8 @@ function convertMs(ms) {
   const day = hour * 24;
 
   const days = addLeadingZero(Math.floor(ms / day));
-
   const hours = addLeadingZero(Math.floor((ms % day) / hour));
-
   const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
-
   const seconds = addLeadingZero(
     Math.floor((((ms % day) % hour) % minute) / second)
   );
